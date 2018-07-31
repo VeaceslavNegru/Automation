@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Collections.Generic;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 
-namespace Automation
+namespace LearnAutomation
 {
     public class Executor
     {
@@ -39,7 +41,14 @@ namespace Automation
 
         public void NavigateTo(String url)
         {
-            driver.Navigate().GoToUrl(url);
+            try
+            {
+                driver.Navigate().GoToUrl(url);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public void InputText(String textValue, String findInputByName)

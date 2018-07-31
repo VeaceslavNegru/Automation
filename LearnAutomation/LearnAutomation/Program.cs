@@ -6,7 +6,7 @@ using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-namespace Automation
+namespace LearnAutomation
 {
     class MainClass
     {
@@ -14,7 +14,7 @@ namespace Automation
         {
             String url = "http://www.google.com";
             String textToSearch = "Grawe Carat";
-            Executor executor = new Executor("firefox");
+            Executor executor = new Executor("Chrome");
             executor.NavigateTo(url);
             executor.InputText(textToSearch, "q");
             IWebElement btn = executor.FindElementByName("btnK");
