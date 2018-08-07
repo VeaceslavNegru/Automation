@@ -51,32 +51,52 @@ namespace LearnAutomation
             }
         }
 
-        public void InputText(String textValue, String findInputByName)
+        public void InputText(String textValue, String findInputBy, String elementType)
         {
-            IWebElement element = driver.FindElement(By.Name(findInputByName));
+            switch(elementType.ToLower())
+            {
+                case "name":
+                    driver.FindElement(By.Name(findInputBy)).SendKeys(textValue);
+                    break;
+                case "id":
+                    driver.FindElement(By.Id(findInputBy)).SendKeys(textValue);
+                    break;
+                case "xpath":
+                    driver.FindElement(By.XPath(findInputBy)).SendKeys(textValue);
+                    break;
+                default:
+                    Console.WriteLine("Input Not implemented for "+elementType+" elemnt type.");
+                    break;
+            }
+     }
 
-            element.SendKeys(textValue);         }
-
-        public void ClickOnElement(IWebElement element)
+        public void ClickOnElement(String clickElementBy, String elementType)
         {
-            try
-            {
-                element.Click(); 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Web element not found. " + e.Message);
-            }
-        }
 
-        public void FindElementByXPath(String xPath)
+            switch (elementType.ToLower())
+            {
+                case "name":
+                    driver.FindElement(By.Name(clickElementBy)).Click();
+                    break;
+                case "id":
+                    driver.FindElement(By.Id(clickElementBy)).Click();
+                    break;
+                case "xpath":
+                    driver.FindElement(By.XPath(clickElementBy)).Click();
+                    break;
+                default:
+                    Console.WriteLine("Click Not implemented for " + elementType + " elemnt type.");
+                    break;
+            }        }
+
+        public void FindElementsByXPath(String xPath)
         {
             ReadOnlyCollection<IWebElement> webElements = driver.FindElements(By.XPath(xPath));
             int index = 1;
 
             foreach (IWebElement item in webElements)
             {
-                Console.WriteLine(index + ": " + item.Text);
+                Console.WriteLine(index + ": "+" : "+item.GetAttribute("name")+" :: "+item.Text);
                 index++;
             }
 

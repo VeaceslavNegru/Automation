@@ -14,14 +14,21 @@ namespace LearnAutomation
         {
             String url = "http://www.google.com";
             String textToSearch = "Grawe Carat";
-            Executor executor = new Executor("Chrome");
+            String browserName = "chrome";
+
+            // initailize WebDriver  - create object instance
+            Executor executor = new Executor(browserName);
+
+
             executor.NavigateTo(url);
-            executor.InputText(textToSearch, "q");
-            IWebElement btn = executor.FindElementByName("btnK");
-            executor.ClickOnElement(btn);
-            //executor.CountResults(textToSearch);
-            executor.FindElementByXPath(".//*[contains(text(),'" + textToSearch + "')]");
+            executor.InputText(textToSearch, "q","name");
+
+
+            executor.ClickOnElement("btnK","name");
+            executor.CountResults(textToSearch.ToLower());
+            executor.FindElementsByXPath(".//*[contains(text(),'" + textToSearch.ToLower() + "')]");
             Thread.Sleep(5000); //delay of 5000 milliseconds or 1 second.
+
             executor.Close();
         }
     }
